@@ -1,0 +1,17 @@
+DATA SEGMENT
+    A DW  0202H
+    B DW  0408H
+    ANS DW ?
+    DATA ENDS
+
+CODE SEGMENT
+    ASSUME CS:CODE , DS : DATA 
+    START:
+    MOV AX , DATA 
+    MOV DS , AX 
+    MOV AX , A 
+    MOV BX , B
+    ADD AX , BX
+    MOV ANS , AX 
+    CODE ENDS
+END START
