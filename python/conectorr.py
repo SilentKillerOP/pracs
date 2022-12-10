@@ -19,5 +19,5 @@ while(1):
         cursor.execute(sql)
         print("Table created successfully!")
     elif val == 2:
-      string = input("Enter name of the table: ")
-      tile = input("Enter the title: ")
+        string = input("Enter name of the table: ")
+        tile = input("Enter the title: ")

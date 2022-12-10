@@ -21,5 +21,4 @@ for i in m:
     elif re.match(name, i):
         names.append(i)
 
-
 print("Mails :",mails,"\nNumbers:", numbers,"\nNames:", names,"\n")
