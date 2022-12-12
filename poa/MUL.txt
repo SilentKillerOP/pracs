@@ -1,6 +1,6 @@
 DATA SEGMENT
-    A DW  0202H
-    B DW  0408H
+    A DW  02H
+    B DW  04H
     ANS DW ?
     DATA ENDS
 
@@ -11,20 +11,7 @@ CODE SEGMENT
     MOV DS , AX 
     MOV AX , A 
     MOV BX , B
-    ADD AX , BX
+    MUL AX , BX
     MOV ANS , AX 
     CODE ENDS
 END START
-
-
-16bit:
-MOV AX,[1000H]
-MOV BX,[1002H]
-MOV CL,00H
-ADD AX,BX
-MOV [1004H],AX
-JNC JUMP
-INC CL
-JUMP:
-MOV [1006H],CL
-HLT

@@ -1,0 +1,27 @@
+data segment
+src db 0x90, 0x34, 0x45, 0x21
+data ends
+
+extra segment 
+    dest db ?
+extra ends
+
+code segment
+assume cs:code, ds:data, es:extra
+
+start:
+mov ax, data
+ 
+mov ds, ax 
+mov ax, extra
+mov es, ax
+
+lea si, src 
+lea di, dest
+mov cx, 0x04 
+cld 
+rep 
+movsb
+
+end start 
+code ends
