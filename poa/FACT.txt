@@ -1,23 +1,28 @@
 DATA SEGMENT
-A DB 5
+A DB 05
 fact DB ?
 DATA ENDS
 CODE SEGMENT
      	ASSUME DS:DATA,CS:CODE
 START:
   	MOV AX,DATA
-  	MOV DX,AX
+  	MOV Ds,AX
   	MOV AH,00
   	MOV AL,A
+  	mov cx ,ax
+  	cmp cx , 00
+  	JNZ L1
+  	mov fact , 01h
+  	jmp l2
 L1:  DEC A
   	MUL A
   	MOV CL,A
   	CMP CL,01
   	JNZ L1
   	MOV fact, AL
+l2:
 CODE ENDS
 END START
-
 
 
 Factorial using macros
