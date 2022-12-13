@@ -1,27 +1,21 @@
-data segment
-src db 0x90, 0x34, 0x45, 0x21
-data ends
+ASSUME DS:DATA, CS:CODE, ES: EXTRA
 
-extra segment 
-    dest db ?
-extra ends
+DATA SEGMENT
+N1 DB 99H, 20H, 56H, 40H, 36H
+DATA ENDS
 
-code segment
-assume cs:code, ds:data, es:extra
+EXTRA SEGMENT
+N2 DB 5 DUP(0)
+EXTRA ENDS
 
-start:
-mov ax, data
- 
-mov ds, ax 
-mov ax, extra
-mov es, ax
-
-lea si, src 
-lea di, dest
-mov cx, 0x04 
-cld 
-rep 
-movsb
-
-end start 
-code ends
+CODE SEGMENT
+START: MOV BX, EXTRA
+MOV ES,BX
+MOV AX,DATA
+MOV DS, AX
+LEA SI, N1
+LEA DI, N2
+MOV CL, 5H
+REP MOVSB
+CODE ENDS
+END START

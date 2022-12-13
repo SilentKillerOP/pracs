@@ -1,5 +1,6 @@
 def bestFit(blockSize, m, processSize, n):
     allocation = [-1] * n
+    b = blockSize.copy()
     for i in range(n):
         bestIdx = -1
         for j in range(m):
@@ -12,8 +13,8 @@ def bestFit(blockSize, m, processSize, n):
         if bestIdx != -1:
             allocation[i] = bestIdx
             blockSize[bestIdx] -= processSize[i]
-
-    print("Process No. Process Size     Block no.")
+    print("Blocks are :" , b)
+    print("Process No.    Process Size     Block no.")
     for i in range(n):
         print(i + 1, "       ", processSize[i],
               end="      ")

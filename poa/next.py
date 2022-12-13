@@ -25,7 +25,7 @@ def NextFit(blockSize, m, processSize, n):
 
 
 if __name__ == '__main__':
-    blockSize = [5, 10, 20]
+    blockSize = [0, 20, 5, 10, 20]
     processSize = [10, 20, 5]
     m = len(blockSize)
     n = len(processSize)
