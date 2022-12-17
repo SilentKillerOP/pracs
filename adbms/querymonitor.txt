@@ -1,0 +1,20 @@
+Simple 
+
+use exp;
+explain select * from agentdetail2;
+
+Where
+
+use exp;
+explain select * from agentdetail2,agentdetail3 where agentdetail2.agentid=agentdetail3.agentid;
+
+Join
+
+use exp;
+explain select * from agentdeetail2 inner join agentdetail3 on agentdetail2.agentid=agentdetail3.agentid;
+
+Nested query
+
+use exp;
+explain select * from agentdetail2 where agentid in (select agentid from agentdetail3);
+

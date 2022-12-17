@@ -1,0 +1,29 @@
+Select query
+
+use exp;
+optimize table agentdetail2;
+select * from agentdetail2 where agent_name = 'a';
+
+Left join
+
+use exp;
+optimize table agentdetail2 ,  agentdetail3;
+select * from agentdetail2 left join agentdetail3 on agentdetail2.agent_name = agentdetail3.agent_name;
+
+Right join
+
+use exp;
+optimize table agentdetail2 ,  agentdetail3;
+select * from agentdetail2 right join agentdetail3 on agentdetail2.agent_name = agentdetail3.agent_name;
+
+Inner join
+
+use exp;
+optimize table agentdetail2 ,  agentdetail3;
+select * from agentdetail2 inner join agentdetail3 on agentdetail2.agent_name = agentdetail3.agent_name;
+
+cross join
+
+use exp;
+optimize table agentdetail2 ,  agentdetail3;
+select * from agentdetail2 cross join agentdetail3; 
