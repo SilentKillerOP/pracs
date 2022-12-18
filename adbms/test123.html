@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML</title>
+</head>
+
+<body>
+    <button type="button" onclick="loadXMLDoc()">View Information about the Books</button>
+    <book></book>
+    <table id="data-table"></table>
+    <script>
+
+        function loadXMLDoc() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    myFunction(this);
+                }
+            };
+            xmlhttp.open("GET", "test.xml", true);
+            xmlhttp.send();
+        }
+        function myFunction(xml) {
+            
+            var i;
+            var xmlDoc = xml.responseXML;
+            var table = "<tr><th>Title</th><th>Author</th><th>Genre</th><th>Price</th><th>Publish Date</th><th>Description</th></tr>";
+            var x = xmlDoc.getElementsByTagName("book");
+            for (i = 0; i < x.length; i++) {
+                table += "<tr><td>" +
+                    x[i].getElementsByTagName("title")[0].childNodes[0].nodeValue +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("author")[0].childNodes[0].nodeValue +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("genre")[0].childNodes[0].nodeValue +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("price")[0].childNodes[0].nodeValue +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("publish_date")[0].childNodes[0].nodeValue +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("description")[0].childNodes[0].nodeValue +
+                    "</td></tr>";
+            }
+            document.getElementById("data-table").innerHTML = table;
+        }
+    </script>
+</body>
+
+</html>
