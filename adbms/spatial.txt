@@ -1,0 +1,58 @@
+const data = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: [
+          [122.0, 10.0],
+          [113.0, 2.0],
+          [14.0, 0.0],
+          [235.0, 1.0],
+        ],
+      },
+      properties: { Name: "Redwood City", time: 14.0 },
+    },
+    {
+      type: "Feature",
+      geometry: {
+        type: "LineString",
+        coordinates: [
+          [102.0, 0.0],
+          [103.0, 1.0],
+          [104.0, 0.0],
+          [105.0, 1.0],
+        ],
+      },
+      properties: { Name: "USA", time: 24.0 },
+    },
+    {
+      type: "Feature",
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [100.0, 0.0],
+            [101.0, 0.0],
+            [101.0, 1.0],
+            [100.0, 1.0],
+            [100.0, 0.0],
+          ],
+        ],
+      },
+      properties: { Name: "Ghatkopar", prop1: { this: "that" } },
+    },
+  ],
+};
+const features = data["features"];
+features.map((feature) => {
+  const coordindates = feature.geometry.coordinates;
+  if (
+    coordindates[0][0] > 100 &&
+    coordindates[0][1] < 102 &&
+    feature.properties.time > 20
+  ) {
+    console.log(feature.properties);
+  }
+});

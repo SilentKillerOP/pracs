@@ -1,0 +1,21 @@
+create database Spa_temp;
+use spa_temp;
+
+create table Dec_records(
+ dates date,
+ present_time time,
+ LastName varchar(25),
+ FirstName varchar(25),
+ Location varchar(25)
+);
+
+insert into Dec_records values
+("2022-12-01","09:20:30","Nagpal","Avni","Kandivali"),
+("2022-12-01","09:30:30","Shukla","Ravi","Andheri"),
+("2022-12-01","09:45:30","Savant","Anvay","Borivali"),
+("2022-12-02","09:00:30","Savant","Anvay","Bhayandar"),
+("2022-12-02","10:00:30","Coelho","Annie","Bandra"),
+("2022-12-02","10:40:30","Petta","Jimmy","Bandra");
+
+select * from Dec_records where present_time < "10:00:00" ;
+select * from Dec_records where location = "Kandivali";
