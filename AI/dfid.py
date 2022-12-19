@@ -1,42 +1,51 @@
 from collections import defaultdict
-
-g = defaultdict(list)
-def addEdge( u, v):
-        g[u].append(v)
-
-def DLS(src, target, maxDepth):
-        if src == target:
-            return str(src)
-        if maxDepth <= 0:
-            return False
-        for i in g[src]:
-            if(DLS(i, target, maxDepth-1)):
-                return str(src)+"->"+str(i)+","+DLS(i, target, maxDepth-1)
+ 
+class Graph:
+ 
+    def __init__(self,vertices):
+ 
+        self.V = vertices # Number of vertices
+        self.graph = defaultdict(list)
+ 
+ 
+    def addEdge(self,u,v):
+        self.graph[u].append(v)
+ 
+    def DLS(self,src,target,maxDepth):
+ 
+        if src == target : return True
+        if maxDepth <= 0 : return False
+ 
+        for i in self.graph[src]:
+                if(self.DLS(i,target,maxDepth-1)):
+                    return True
         return False
-
-def IDDFS(src, target, maxDepth):
+       
+    def IDDFS(self,src, target, maxDepth):
         for i in range(maxDepth):
-            if (DLS(src, target, i)):
-                return DLS(src, target, i)
+            if (self.DLS(src, target, i)):
+                return True
         return False
-
-
-
-addEdge(0, 1)
-addEdge(0, 2)
-addEdge(1, 3)
-addEdge(1, 4)
-addEdge(2, 5)
-addEdge(2, 6)
-
-target = 6
-maxDepth = 4
-src = 0
-
-if IDDFS(src, target, maxDepth) :
-    print("Target is reachable from source " +
-          "by sequence:" , end='')
-    ans = IDDFS(src, target, maxDepth) 
-    print(ans[:-1])
-else:
-    print("Target is NOT reachable from source " + "within max depth")
+ 
+# Create a graph
+#        0
+#      /   \
+#     1      2
+#    / \     | \
+#   3   4   5   6
+ 
+g = Graph (7)
+g.addEdge(0, 1)
+g.addEdge(0, 2)
+g.addEdge(1, 3)
+g.addEdge(1, 4)
+g.addEdge(2, 5)
+g.addEdge(2, 6)
+ 
+for i in range(2):
+    target = [5, 3]; maxDepth = [3,2]; src = 0
+ 
+    if g.IDDFS(src, target[i], maxDepth[i]) == True:
+        print ("Target "+str(target[i]) +" is reachable from source within max depth of "+str(maxDepth[i]))
+    else :
+        print ("Target "+str(target[i]) +" is NOT reachable from source within max depth of "+str(maxDepth[i]))

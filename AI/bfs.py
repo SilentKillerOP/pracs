@@ -1,24 +1,56 @@
-from collections import deque
-nodes = { "a" : ['b','c'] , "b":['d'] , "c":['e'] ,"d":['a'] , 'e':['f'] , 'f':['a']}
-q = deque()
-v = set()
-def bfs(i , key):
-    if i == key: return [i]
-    else: 
-        o = []
-        q.append(i)
-        v.add(i)
-        while q:
-            c = q.popleft()
-            o+=[c]
-            for j in nodes[c]:
-                if j not in v:
-                    v.add(j)
-                    q.append(j)
-                    if j == key:
-                        return o
-        return o
-ans = bfs('a','f')
-print("Sequence : " ,end = "")
-for i in ans:
-    print(i , end=" ")
+graph = {
+  '5' : ['3','7'],
+  '3' : ['2', '4'],
+  '7' : ['8'],
+  '2' : [],
+  '4' : ['8'],
+  '8' : []
+}
+ 
+visited = []
+queue = []
+ 
+closed_list=[]
+path=[]
+ 
+def bfs(visited, graph, node,goal):
+   
+    visited.append(node)
+    path={}
+    path[node]=node
+    root=[]
+    queue.append(node)
+    print(f"Open List: {queue}\nClosed list: {closed_list} ")
+ 
+    while queue:        
+        m = queue.pop(0)
+        closed_list.append(m)
+        print(f"Open List: {queue}\nClosed list: {closed_list} ")
+   
+       
+   
+        if m==goal:
+           
+            while path[m]!=m:
+                root.append(m)
+                m=path[m]
+            root.append(m)
+            root.reverse()
+            print(f'Path:{root}')
+            return
+     
+ 
+        for neighbour in graph[m]:
+            if neighbour not in visited:
+                visited.append(neighbour)
+                queue.append(neighbour)
+                path[neighbour]=m
+           
+       
+    print(f'Path :{path}')
+ 
+ 
+ 
+ 
+print("Following is the Breadth-First Search")
+bfs(visited, graph, '5','4')  
