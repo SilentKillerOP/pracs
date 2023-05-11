@@ -36,3 +36,5 @@ while True:
 
     print("Account balance:", account)
     print()
+
+# https:://raw.githubusercontent.com/SilentkillerOP/pracs/sem6/aa/accounting.py
