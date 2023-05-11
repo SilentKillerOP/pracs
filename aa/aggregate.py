@@ -1,25 +1,35 @@
-import time 
-import random
-cost = 0
-def multipop(stck,n):
-    global cost
+def print_arr(arr, n):
     for i in range(n):
-      stck.pop()
-      cost+=1
-    return stck
+        print(arr[i], end=" ")
+    print()
 
-def mstck(stck):
-  global cost
-  s = []
-  for i in stck:
-    if i <= len(s):
-      s = multipop(s , i)
-    s.append(i)
-    cost+=1
-    print("Element value:",i ,',Stack:', s ,",Amortize cost:",  cost)
+size = 1
+count = 0
+arr = [None] * size
+p = arr
+cost = 0
 
-ar = [random.randint(1,10) for i in range(10)]
-print("Array :",ar)
-mstck(ar)
+while True:
+    n = int(input("Enter the number you wish to insert in the dynamic table: "))
 
-print("Amortize cost:" , cost ,'\n' , "Asymptotic cost:" , len(ar)**2)
+    if count < size:
+        p[count] = n
+        count += 1
+        print(p)
+        print_arr(p, count)
+        cost += 1
+    else:
+        print("Double")
+        new_arr = [None] * (size * 2)
+        for i in range(count):
+            new_arr[i] = p[i]
+        cost += count + 1
+        size *= 2
+        new_arr[count] = n
+        count += 1
+        p = new_arr
+        print(p)
+        print_arr(p, count)
+
+    print("Amortized Cost:", cost )
+    print()

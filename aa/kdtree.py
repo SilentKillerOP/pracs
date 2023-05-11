@@ -17,9 +17,14 @@ class KDTree:
             return None
 
         axis = depth % len(points[0])
-        sorted_points = points
-        mid = n // 2
-
+        mid = list(points[0])
+        sorted_points = sorted(points, key=lambda point: point[axis])
+        c = 0
+        for i in sorted_points:
+            if list(i) == mid:
+                mid = c
+                break
+            c += 1
         return Node(
             sorted_points[mid],
             axis,

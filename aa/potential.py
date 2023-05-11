@@ -1,47 +1,41 @@
-import math 
-
 class DynamicTable:
-  def __init__(self, capacity=1):
-    self.table = [0] * capacity
-    self.size = 0
-    self.capacity = capacity
-  def add(self, element):
-    if self.size == self.capacity:
-    # Double the capacity of the table if it is full
-      new_table = [0] * (self.capacity * 2)
-      for i in range(self.size):
-        new_table[i] = self.table[i]
+    def __init__(self):
+        self.table = [None] * 1  # Initial size of the table
+        self.size = 0  # Number of elements currently in the table
+        self.potential = 0  # Potential value
+
+    def insert(self, item):
+        if self.size == len(self.table):
+            self.resize_table()  # Double the size of the table if it becomes full
+
+        self.table[self.size] = item
+        self.size += 1
+        self.potential = len(self.table) - self.size  # Update the potential value
+
+    def resize_table(self):
+        new_table = [None] * (2 * len(self.table))  # Double the size of the table
+        for i in range(self.size):
+            new_table[i] = self.table[i]
         self.table = new_table
-        self.capacity *= 2
-        # print(f"Table doubled, new size: {self.capacity}")
-      self.table.append(element)
-      self.size += 1
-    def size(self):
-      return self.size
-  def capacity(self):
-    return self.capacity
-  def numDoublings(self):
-  # Calculate the number of times the table was doubled
-    return int(math.log2(self.capacity))
-  def numCopyings(self):
-  # Calculate the number of times elements were copied during resizing
-    num_copyings = 0
-    for i in range(1, self.numDoublings() + 1):
-      num_copyings += 2**(i-1)
-    return num_copyings
+
+    def get_table_size(self):
+        return len(self.table)
+
+    def get_number_of_elements(self):
+        return self.size
+
+    def get_potential(self):
+        return self.potential
+
+    def get_amortized_cost(self):
+        return 1 + self.potential
+
+
+# Example usage
 table = DynamicTable()
-cost = 0
-f = 0
-operation_cost = 1
-print("Item No\tTable Size\tTable Cost\tCost of Operation")
-print("=====================================================")
-for i in range(1, 18):
-  table.add(i)
-  if f == 1:
-    cost = table.size
-    f = 0
-  else:
-    cost = 1
-  if table.size == table.capacity:
-    f = 1
-  print(f"{i}\t{table.capacity}\t\t{cost}\t\t\t{operation_cost}")
+for i in range(100):
+  table.insert(1)
+  print("Table size:", table.get_table_size())
+  print("Number of elements:", table.get_number_of_elements())
+  print("Potential:", table.get_potential())
+  print("Amortized cost:", table.get_amortized_cost())

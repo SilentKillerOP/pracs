@@ -1,12 +1,9 @@
-from collections import defaultdict
-
 class Graph:
 
     def __init__(self, graph):
         self.graph = graph
         self.ROW = len(graph)
 
-    # Modified DFS function to return augmented path and its minimum value
     def dfs(self, u, t, visited, parent):
         visited[u] = True
         if u == t:
@@ -19,7 +16,7 @@ class Graph:
                     return True, parent
         return False, parent
 
-    # Applying Ford-Fulkerson algorithm
+
     def ford_fulkerson(self, source, sink):
         max_flow = 0
         parent = [-1] * self.ROW
@@ -30,23 +27,21 @@ class Graph:
                 break
             path_flow = float("Inf")
             s = sink
+            path = [sink]
             while s != source:
                 path_flow = min(path_flow, self.graph[parent[s]][s])
                 s = parent[s]
+                path.insert(0, s)
+
             max_flow += path_flow
-            # Print the augmented path and its minimum value
-            path = [sink]
-            v = sink
-            while v != source:
-                u = parent[v]
-                path.insert(0, u)
-                v = u
+
             print("Augmented path: ", " -> ".join(str(x) for x in path), " Minimum value: ", path_flow)
+
             v = sink
             while v != source:
                 u = parent[v]
                 self.graph[u][v] -= path_flow
-                self.graph[v][u] += path_flow
+                self.graph[v][u] += path_flow   
                 v = u
         return max_flow
 

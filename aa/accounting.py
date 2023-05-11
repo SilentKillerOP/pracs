@@ -1,27 +1,38 @@
-import time 
-import random
-bank = 0
-ccost = 3
-cost = 0 
-def multipop(stck,n):
-    global cost
+def print_arr(arr, n):
     for i in range(n):
-      stck.pop()
-    return stck
+        print(arr[i], end=" ")
+    print()
 
-def mstck(stck):
-  global cost 
-  cost = 0
-  s = []
-  for i in stck:
-    if i <= len(s):
-      s = multipop(s , i)
-    s.append(i)
-    bank+= ccost - cost
-    print(i , s , cost)
+size = 1
+count = 0
+arr = [None] * size
+p = arr
+account = 0
 
-ar = [random.randint(1,10) for i in range(10)]
-print(ar)
-mstck(ar)
+print("Initial account balance =", account)
+print()
 
-print(" Amortize cost:" , cost ,'\n' , "Asymptotic cost:" , len(ar)**2)
+while True:
+    n = int(input("Enter the number you wish to insert in the dynamic table: "))
+    account += 3  # adding 3 to the account
+
+    if count < size:
+        p[count] = n
+        count += 1
+        print_arr(p, count)
+        account -= 1
+    else:
+        print("Double")
+        new_arr = [None] * (size * 2)
+        for i in range(count):
+            new_arr[i] = p[i]
+        account -= count
+        p = new_arr
+        p[count] = n
+        size *= 2
+        count += 1
+        account -= 1
+        print_arr(p, count)
+
+    print("Account balance:", account)
+    print()
